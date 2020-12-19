@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap");
+@import "material-box-shadow.scss";
+
+$header-height: 64px;
+$controls-height: 48px;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    background-color: #eaeaea;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $header-height;
+    border-radius: 0px;
+    padding: 0 16px;
+    background-color: #111111;
+    color: white;
+    @include MaterialBoxShadow(4);
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+section {
+    margin-top: 64px;
+}
+
+section#signIn {
+    height: calc(100vh - #{$header-height});
+    display: grid;
+    place-items: center;
+}
+
+.signIn-button {
+    margin: 8px;
+    padding: 8px 16px;
+    border: 2px solid #4285f4;
+    color: #1d1d1d;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.signOut-button {
+    cursor: pointer;
+}
+
+section#chatbot {
+    height: calc(100vh - #{$header-height} - #{$controls-height});
+    overflow: scroll;
+    .messages {
+        display: flex;
+        flex-flow: column nowrap;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        .message {
+            padding: 8px;
+            margin: 4px;
+            background-color: lightblue;
+            opacity: 1;
+            transition: opacity 250ms ease-in-out;
+        }
+        .message.hidden {
+            opacity: 0;
+        }
+        .message.client {
+            align-self: flex-end;
+            background-color: #333333;
+            margin-left: 48px;
+            border-radius: 14px 14px 6px 14px;
+            color: white;
+        }
+        .message.bot {
+            align-self: flex-start;
+            background-color: #f9a825;
+            margin-right: 48px;
+            border-radius: 14px 14px 14px 6px;
+            color: black;
+        }
+    }
+    .controls {
+        @include MaterialBoxShadow(2);
+
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: $controls-height;
+        width: 100vw;
+        $submit-width: 64px;
+        #input {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: $controls-height;
+            width: calc(100vw - #{$submit-width});
+            border: none;
+            padding: 0 16px;
+            outline: none;
+            background-color: white;
+        }
+
+        #submit {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: $controls-height;
+            width: $submit-width;
+            border: none;
+            outline: none;
+            transition: background-color 350ms ease-in-out;
+            background-color: #d1d1d1;
+            cursor: pointer;
+        }
+        #submit:hover {
+            background-color: #dddddd;
+        }
+        #submit:active {
+            background-color: #c4c4c4;
+        }
+    }
+}
