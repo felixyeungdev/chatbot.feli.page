@@ -1,9 +1,11 @@
 const { AnimalPhotosAPI } = require("./animalPhotosAPI");
 const { CovidAPI } = require("./covidAPI");
+const { DateFormat } = require("./dateFormat");
 const { DialogFlowAPI } = require("./dialogflow");
 const { HomeworkAPI, LessonsAPI } = require("./homeworkLessonAPI");
 const { LyricsAPI } = require("./lyricsAPI");
 const { MathsAPI } = require("./mathsAPI");
+const { ReminderAPI } = require("./reminderAPI");
 const { TimeAPI } = require("./timeAPI");
 const { UserAPI } = require("./userAPI");
 const { WeatherAPI } = require("./weatherAPI");
@@ -40,7 +42,7 @@ class ChatBot {
                 },
             ];
         }
-        console.log({ message, userId });
+        // console.log({ message, userId });
         let {
             reply,
             action,
@@ -150,11 +152,41 @@ class ChatBot {
                 break;
 
             case "reminder_set":
-                addMessageReply("This feature is not available on web yet");
+                if (!allRequiredParamsPresent) break;
+
+                var reminderContent = fields["reminder"].stringValue;
+                var time =
+                    fields["date-time"].stringValue ||
+                    fields["date-time"].structValue.fields.date_time
+                        .stringValue;
+
+                await ReminderAPI.addReminder(
+                    userId,
+                    ReminderAPI.reminderTemplate({
+                        content: reminderContent,
+                        time: new Date(time).getTime(),
+                    })
+                );
+                addMessageReply(`Reminder Set`);
                 break;
 
             case "reminder_get":
-                addMessageReply("This feature is not available on web yet");
+                if (!allRequiredParamsPresent) break;
+
+                var reminderReport = "";
+                var userReminders = await ReminderAPI.getUserReminders(userId);
+
+                if (userReminders.length <= 0)
+                    reminderReport = "You have no reminders";
+
+                for (let reminder of userReminders) {
+                    var prettyDate = DateFormat.format.prettyDate(
+                        new Date(reminder.time)
+                    );
+                    reminderReport += `*Reminder*\n${reminder.content}\n${prettyDate}\n\n`;
+                }
+
+                addMessageReply(reminderReport);
                 break;
 
             case "maths_random_two-num":

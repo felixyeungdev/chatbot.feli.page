@@ -44,14 +44,30 @@ class UserAPI {
         return permissions;
     }
 
+    static async getUserReminders(userId) {
+        let user = await this.getUser(userId);
+        let reminders = user.reminders || [];
+        return reminders;
+    }
+
     static async setUserPermissions(userId, permissions) {
         await users.update({ userId }, { $set: { permissions } });
+    }
+
+    static async setUserReminders(userId, reminders) {
+        await users.update({ userId }, { $set: { reminders } });
     }
 
     static async addUserPermission(userId, permission) {
         let permissions = await this.getUserPermissions(userId);
         !permissions.includes(permission) && permissions.push(permission);
         await this.setUserPermissions(userId, permissions);
+    }
+
+    static async addUserReminder(userId, reminder) {
+        let reminders = await this.getUserReminders(userId);
+        reminders.push(reminder);
+        await this.setUserReminders(userId, reminders);
     }
 
     static async removeUserPermission(userId, permission) {
