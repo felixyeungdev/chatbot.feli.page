@@ -1,6 +1,4 @@
 const fetch = require("node-fetch");
-const { sync } = require("resolve");
-const { request } = require("http");
 
 async function getWordsAPIData(word) {
     var response = await fetch(
