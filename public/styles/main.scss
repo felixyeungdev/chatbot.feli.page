@@ -130,6 +130,7 @@ section#chatbot {
     display: grid;
     grid-template-columns: 4fr 1fr;
     grid-template-areas: ". .";
+    background-color: #ffffff;
 
     @media screen and (min-width: 500px) {
         border-radius: 16px 16px 0 0;
