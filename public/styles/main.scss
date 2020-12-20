@@ -75,7 +75,7 @@ section#chatbot {
     left: 50%;
     transform: translateX(-50%);
     margin-top: $header-height;
-    padding-bottom: $controls-height;
+    margin-bottom: $controls-height;
     .messages {
         margin-right: 8px;
         margin-left: 8px;
