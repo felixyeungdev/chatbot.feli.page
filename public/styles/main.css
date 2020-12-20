@@ -96,7 +96,7 @@ section#chatbot {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   margin-top: 64px;
-  margin-bottom: 48px;
+  padding-bottom: 48px;
 }
 
 section#chatbot .messages {
