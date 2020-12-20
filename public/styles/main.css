@@ -27,8 +27,11 @@ body {
 header {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   width: 100vw;
+  max-width: 500px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -45,6 +48,12 @@ header {
   color: white;
   -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
           box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 500px) {
+  header {
+    border-radius: 0 0 16px 16px;
+  }
 }
 
 header h1 {
@@ -79,9 +88,18 @@ section#signIn {
 section#chatbot {
   height: calc(100vh - 64px - 48px);
   overflow: scroll;
+  max-width: 500px;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 section#chatbot .messages {
+  margin-right: 8px;
+  margin-left: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -100,6 +118,8 @@ section#chatbot .messages .message {
   opacity: 1;
   -webkit-transition: opacity 250ms ease-in-out;
   transition: opacity 250ms ease-in-out;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 section#chatbot .messages .message img {
@@ -130,34 +150,46 @@ section#chatbot .messages .message.bot {
   color: black;
 }
 
-section#chatbot .controls {
+.controls {
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   height: 48px;
   width: 100vw;
+  max-width: 500px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 4fr 1fr;
+      grid-template-columns: 4fr 1fr;
+      grid-template-areas: ". .";
 }
 
-section#chatbot .controls #input {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+@media screen and (min-width: 500px) {
+  .controls {
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+.controls #input {
   height: 48px;
-  width: calc(100vw - 64px);
   border: none;
   padding: 0 16px;
   outline: none;
   background-color: white;
 }
 
-section#chatbot .controls #submit {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+@media screen and (min-width: 500px) {
+  .controls #input {
+    border-top-left-radius: 16px;
+  }
+}
+
+.controls #submit {
   height: 48px;
-  width: 64px;
   border: none;
   outline: none;
   -webkit-transition: background-color 350ms ease-in-out;
@@ -166,11 +198,17 @@ section#chatbot .controls #submit {
   cursor: pointer;
 }
 
-section#chatbot .controls #submit:hover {
+@media screen and (min-width: 500px) {
+  .controls #submit {
+    border-top-right-radius: 16px;
+  }
+}
+
+.controls #submit:hover {
   background-color: #dddddd;
 }
 
-section#chatbot .controls #submit:active {
+.controls #submit:active {
   background-color: #c4c4c4;
 }
 /*# sourceMappingURL=main.css.map */
