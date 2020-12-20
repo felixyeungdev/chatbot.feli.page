@@ -73,6 +73,11 @@ section#chatbot {
             background-color: lightblue;
             opacity: 1;
             transition: opacity 250ms ease-in-out;
+            img {
+                border-radius: 16px;
+                max-width: 500vw;
+                width: 200px;
+            }
         }
         .message.hidden {
             opacity: 0;

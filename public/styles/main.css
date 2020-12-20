@@ -102,6 +102,12 @@ section#chatbot .messages .message {
   transition: opacity 250ms ease-in-out;
 }
 
+section#chatbot .messages .message img {
+  border-radius: 16px;
+  max-width: 500vw;
+  width: 200px;
+}
+
 section#chatbot .messages .message.hidden {
   opacity: 0;
 }
