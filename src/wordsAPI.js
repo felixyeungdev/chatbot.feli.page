@@ -1,5 +1,9 @@
 const fetch = require("node-fetch");
 
+const APIKEY = require("./secret/rapidapi-key.json")[
+    "wordsapiv1-p-rapidapi-com"
+];
+
 async function getWordsAPIData(word) {
     var response = await fetch(
         `https://wordsapiv1.p.rapidapi.com/words/${word}`,
@@ -7,8 +11,7 @@ async function getWordsAPIData(word) {
             method: "GET",
             headers: {
                 "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-                "x-rapidapi-key":
-                    "f762603c61mshc7119ea0594e324p107747jsndb4e4d5e2cc7",
+                "x-rapidapi-key": APIKEY,
             },
         }
     );
