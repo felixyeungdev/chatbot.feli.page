@@ -25,7 +25,7 @@ class ChatBot {
         messages = [],
         fromClient
     ) {
-        console.log(messages);
+        // console.log(messages);
         for (var message of messages) {
             const { type, content } = message;
             const messageDiv = document.createElement("div");
@@ -42,6 +42,9 @@ class ChatBot {
                     const image = document.createElement("img");
                     image.src = content;
                     messageDiv.append(image);
+                    image.addEventListener("load", () =>
+                        scrollToBottom(messagesDiv.parentNode)
+                    );
                     break;
 
                 default:
