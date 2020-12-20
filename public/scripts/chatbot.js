@@ -39,6 +39,9 @@ class ChatBot {
                     break;
 
                 case "image":
+                    const image = document.createElement("img");
+                    image.src = content;
+                    messageDiv.append(image);
                     break;
 
                 default:
