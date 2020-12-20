@@ -6,11 +6,13 @@ const chatbotSection = document.querySelector("#chatbot");
 const inputField = document.querySelector("#input");
 const submitButton = document.querySelector("#submit");
 const messagesDiv = document.querySelector("#messages");
+const controlsDiv = document.querySelector(".controls");
 
 function handleSignedIn(signedIn) {
     signInSection.style.display = signedIn ? "none" : "";
     chatbotSection.style.display = !signedIn ? "none" : "";
     signOutButton.style.display = !signedIn ? "none" : "";
+    controlsDiv.style.display = !signedIn ? "none" : "";
     if (!signedIn) messagesDiv.innerHTML = "";
 }
 
