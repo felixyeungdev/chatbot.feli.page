@@ -17,7 +17,7 @@ $app-max-width: 500px;
 }
 
 body {
-    background-color: #eaeaea;
+    background-color: lighten(#eaeaea, 5%);
 }
 
 header {
@@ -62,10 +62,22 @@ section#signIn {
     color: #1d1d1d;
     border-radius: 8px;
     cursor: pointer;
-    background-color: white;
+    background-color: lighten(#f1f1f1, 0%);
+    transition: box-shadow 250ms ease-in-out, background-color 250ms ease-in-out;
+    user-select: none;
+    @include MaterialBoxShadow(4);
+}
+.signIn-button:hover {
+    background-color: lighten(#f1f1f1, 1%);
+    @include MaterialBoxShadow(8);
+}
+.signIn-button:active {
+    background-color: darken(#f1f1f1, 1%);
+    @include MaterialBoxShadow(2);
 }
 
 .signOut-button {
+    user-select: none;
     cursor: pointer;
 }
 
