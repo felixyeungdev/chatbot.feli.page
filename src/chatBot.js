@@ -261,8 +261,13 @@ class ChatBot {
 
             case "get_word_definition":
                 if (!allRequiredParamsPresent) break;
-                let word = fields["word"].stringValue;
-                let wordDefinitionReport = await WordsAPI.generateReport(word);
+                var word = fields["word"].stringValue;
+                var wordDefinitionReport = await WordsAPI.generateReport(word);
+                addMessageReply(wordDefinitionReport);
+                break;
+
+            case "get_word_random":
+                var wordDefinitionReport = await WordsAPI.generateReportRandomWord();
                 addMessageReply(wordDefinitionReport);
                 break;
 

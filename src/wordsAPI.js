@@ -4,24 +4,37 @@ const APIKEY = require("./secret/rapidapi-key.json")[
     "wordsapiv1-p-rapidapi-com"
 ];
 
-async function getWordsAPIData(word) {
-    var response = await fetch(
-        `https://wordsapiv1.p.rapidapi.com/words/${word}`,
-        {
-            method: "GET",
-            headers: {
-                "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-                "x-rapidapi-key": APIKEY,
-            },
-        }
-    );
+async function fetchWrapper(link) {
+    var response = await fetch(link, {
+        method: "GET",
+        headers: {
+            "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+            "x-rapidapi-key": APIKEY,
+        },
+    });
     let json = response.json();
     return json;
 }
 
+async function getWordsAPIDataByWord(word) {
+    return await fetchWrapper(
+        `https://wordsapiv1.p.rapidapi.com/words/${word}`
+    );
+}
+async function getWordsAPIDataByRandom() {
+    return await fetchWrapper(
+        `https://wordsapiv1.p.rapidapi.com/words/?random=true`
+    );
+}
+
 class WordsAPI {
     static async getWord(word = "example") {
-        let json = await getWordsAPIData(word);
+        let json = await getWordsAPIDataByWord(word);
+        return json;
+    }
+
+    static async getRandomWord() {
+        let json = await getWordsAPIDataByRandom();
         return json;
     }
 
@@ -61,10 +74,33 @@ ${num}: ${word} (${result.partOfSpeech})
 
         return report;
     }
+
+    static async generateReportRandomWord() {
+        var json;
+        try {
+            json = await this.getRandomWord();
+            const word = json["word"];
+            const topResult = json["results"][0];
+            const pronunciation = json["pronunciation"]
+                ? json["pronunciation"]["all"] || json["pronunciation"]
+                : null;
+
+            let report = `${word} ${pronunciation ? pronunciation : ""}\n${
+                topResult["definition"]
+            }`;
+            // console.log({ topResult, pronunciation, word });
+            return report;
+        } catch (error) {
+            // console.log(json);
+            // console.log(error);
+            return "An unexpected error occurred";
+        }
+    }
 }
 
 async function test() {
-    console.log(await WordsAPI.generateReport());
+    // console.log(await WordsAPI.generateReport());
+    console.log(await WordsAPI.generateReportRandomWord());
 }
 
 // test();
