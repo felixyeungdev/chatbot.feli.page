@@ -21,6 +21,7 @@
     "dependencies": {
         "dateformat": "^4.3.1",
         "dialogflow": "^1.2.0",
+        "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "firebase-admin": "^9.4.2",
         "monk": "^7.3.2",
