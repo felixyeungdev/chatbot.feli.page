@@ -28,8 +28,10 @@
         "node-cron": "^2.0.3",
         "node-fetch": "^2.6.1",
         "nodemailer": "^6.4.17",
-        "nodemon": "^2.0.6",
         "uuid": "^8.3.2",
         "yeelight-platform": "^1.0.9"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
     }
 }
