@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const PORT = 8089;
+const PORT = process.env.PORT || 8089;
 const decodeIDToken = require("./src/authenticateToken");
 const { ChatBot } = require("./src/chatBot");
 const { UserAPI } = require("./src/userAPI");
@@ -47,4 +47,4 @@ reminderEmitter.on("time", async (reminder) => {
 ReminderAPI.start();
 YeelightAPI.start();
 
-app.listen(PORT, () => console.log(`Server listening on ${8089}`));
+app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
