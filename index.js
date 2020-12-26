@@ -19,11 +19,15 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/api/chatBot", decodeIDToken, async (req, res) => {
     const result = {};
-    result.auth = req.currentUser ? true : false;
-    const message = req.body.message;
-    const userId = req.currentUser ? req.currentUser.user_id : null;
-    await UserAPI.registerUser(userId, req.currentUser);
-    result.messages = await ChatBot.handleRequest(message, userId);
+    try {
+        result.auth = req.currentUser ? true : false;
+        const message = req.body.message;
+        const userId = req.currentUser ? req.currentUser.user_id : null;
+        await UserAPI.registerUser(userId, req.currentUser);
+        result.messages = await ChatBot.handleRequest(message, userId);
+    } catch (error) {
+        result.error = error;
+    }
     res.send(result);
 });
 
