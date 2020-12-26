@@ -1,6 +1,10 @@
 const nodemailer = require("nodemailer");
-const credentials = require("./secret/noreply@feli.page-credentials.json");
-
+var credentials = process.env.NOREPLY_FELI_PAGE_EMAIL_CREDENTIALS;
+if (credentials) {
+    credentials = JSON.parse(credentials);
+} else {
+    credentials = require("./secret/noreply@feli.page-credentials.json");
+}
 // console.log(credentials);
 
 const transporter = nodemailer.createTransport({

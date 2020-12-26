@@ -1,8 +1,8 @@
 const fetch = require("node-fetch");
 
-const APIKEY = require("./secret/rapidapi-key.json")[
-    "wordsapiv1-p-rapidapi-com"
-];
+const APIKEY =
+    process.env.WORDSAPIV1_P_RAPIDAPI_COM ||
+    require("./secret/rapidapi-key.json")["wordsapiv1-p-rapidapi-com"];
 
 async function fetchWrapper(link) {
     var response = await fetch(link, {

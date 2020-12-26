@@ -1,6 +1,11 @@
 const fetch = require("node-fetch");
 
-const secrets = require("./secret/homework-api.json");
+var secrets = process.env.HOMEWORK_API;
+if (secrets) {
+    secrets = JSON.parse(secrets);
+} else {
+    secrets = require("./secret/homework-api.json");
+}
 
 const { APIKEY, HomeworkCalendar, MainCalendar } = secrets;
 

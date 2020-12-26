@@ -1,4 +1,9 @@
-const serviceAccount = require("./secret/dialogflow-service-account.json");
+var serviceAccount = process.env.DIALOGFLOW_SERVICE_ACCOUNT;
+if (serviceAccount) {
+    serviceAccount = JSON.parse(serviceAccount);
+} else {
+    serviceAccount = require("./secret/dialogflow-service-account.json");
+}
 
 const { SessionsClient } = require("dialogflow");
 
