@@ -26,7 +26,7 @@ app.post("/api/chatBot", decodeIDToken, async (req, res) => {
         await UserAPI.registerUser(userId, req.currentUser);
         result.messages = await ChatBot.handleRequest(message, userId);
     } catch (error) {
-        result.error = error;
+        console.log(error);
     }
     res.send(result);
 });
