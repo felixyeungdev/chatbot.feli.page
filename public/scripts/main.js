@@ -9,37 +9,38 @@ const messagesDiv = document.querySelector("#messages");
 const controlsDiv = document.querySelector(".controls");
 
 function handleSignedIn(signedIn) {
-    signInSection.style.display = signedIn ? "none" : "";
-    chatbotSection.style.display = !signedIn ? "none" : "";
-    signOutButton.style.display = !signedIn ? "none" : "";
-    controlsDiv.style.display = !signedIn ? "none" : "";
-    if (!signedIn) messagesDiv.innerHTML = "";
+	signInSection.style.display = signedIn ? "none" : "";
+	chatbotSection.style.display = !signedIn ? "none" : "";
+	signOutButton.style.display = !signedIn ? "none" : "";
+	controlsDiv.style.display = !signedIn ? "none" : "";
+	if (!signedIn) messagesDiv.innerHTML = "";
 }
 
 async function signIn() {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    const result = await firebase.auth().signInWithPopup(provider);
+	var provider = new firebase.auth.GoogleAuthProvider();
+	const result = await firebase.auth().signInWithPopup(provider);
 }
 
 async function signOut() {
-    await firebase.auth().signOut();
+	await firebase.auth().signOut();
 }
 
 async function handleSubmit() {
-    const message = inputField.value.trim();
-    inputField.value = "";
-    ChatBot.renderMessages(
-        messagesDiv,
-        [{ type: "string", content: message }],
-        true
-    );
-    const response = await ChatBot.getResponse(message);
-    ChatBot.renderMessages(messagesDiv, response.messages, false);
+	const message = inputField.value.trim();
+	inputField.value = "";
+	if (message === "") return;
+	ChatBot.renderMessages(
+		messagesDiv,
+		[{ type: "string", content: message }],
+		true
+	);
+	const response = await ChatBot.getResponse(message);
+	ChatBot.renderMessages(messagesDiv, response.messages, false);
 }
 
 firebase.auth().onAuthStateChanged(async (user) => {
-    userToken = user ? await user.getIdToken() : null;
-    user ? handleSignedIn(true) : handleSignedIn(false);
+	userToken = user ? await user.getIdToken() : null;
+	user ? handleSignedIn(true) : handleSignedIn(false);
 });
 
 signInButton.addEventListener("click", signIn);
@@ -47,10 +48,10 @@ signOutButton.addEventListener("click", signOut);
 
 submitButton.addEventListener("click", handleSubmit);
 inputField.addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        handleSubmit();
-    }
+	if (event.key === "Enter") {
+		event.preventDefault();
+		handleSubmit();
+	}
 });
 
 handleSignedIn(false);
