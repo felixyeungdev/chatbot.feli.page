@@ -37,6 +37,7 @@ async function signOut() {
 async function handleSubmit() {
     const message = inputField.value.trim();
     inputField.value = "";
+    if (message === "") return;
     ChatBot.renderMessages(
         messagesDiv,
         [{ type: "string", content: message }],
