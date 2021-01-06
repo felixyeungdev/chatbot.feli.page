@@ -6,12 +6,15 @@ class UserAPI {
     static async registerUser(userId, user) {
         if (!user) return;
         let match = await this.getUser(userId);
+        console.log(user);
         if (match) return;
-        const { name, email } = user;
+        const { name, email, provider_id } = user;
         users.insert({
             userId,
             name,
             email,
+            provider_id,
+            createdAt: new Date(),
         });
     }
 
