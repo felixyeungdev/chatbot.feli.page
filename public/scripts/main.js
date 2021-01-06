@@ -1,5 +1,8 @@
 var userToken;
 const signInButton = document.querySelector("#signInButton");
+const signInAnonymouslyButton = document.querySelector(
+    "#signInAnonymouslyButton"
+);
 const signOutButton = document.querySelector("#signOutButton");
 const signInSection = document.querySelector("#signIn");
 const chatbotSection = document.querySelector("#chatbot");
@@ -16,7 +19,13 @@ function handleSignedIn(signedIn) {
     if (!signedIn) messagesDiv.innerHTML = "";
 }
 
-async function signIn() {
+async function signIn(provider) {
+    if (provider === "anonymous") {
+        const result = await firebase.auth().signInAnonymously();
+        console.log({ result });
+        return;
+    }
+
     var provider = new firebase.auth.GoogleAuthProvider();
     const result = await firebase.auth().signInWithPopup(provider);
 }
@@ -42,7 +51,8 @@ firebase.auth().onAuthStateChanged(async (user) => {
     user ? handleSignedIn(true) : handleSignedIn(false);
 });
 
-signInButton.addEventListener("click", signIn);
+signInButton.addEventListener("click", () => signIn("google"));
+signInAnonymouslyButton.addEventListener("click", () => signIn("anonymous"));
 signOutButton.addEventListener("click", signOut);
 
 submitButton.addEventListener("click", handleSubmit);
