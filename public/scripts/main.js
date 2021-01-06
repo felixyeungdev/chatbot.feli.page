@@ -20,14 +20,20 @@ function handleSignedIn(signedIn) {
 }
 
 async function signIn(provider) {
-    if (provider === "anonymous") {
-        const result = await firebase.auth().signInAnonymously();
-        console.log({ result });
-        return;
-    }
+    switch (provider) {
+        case "anonymous":
+            var result = await firebase.auth().signInAnonymously();
+            break;
 
-    var provider = new firebase.auth.GoogleAuthProvider();
-    const result = await firebase.auth().signInWithPopup(provider);
+        case "google":
+            var provider = new firebase.auth.GoogleAuthProvider();
+            var result = await firebase.auth().signInWithPopup(provider);
+            break;
+
+        default:
+            console.error(`${provider} not found or is not supported`);
+            break;
+    }
 }
 
 async function signOut() {
