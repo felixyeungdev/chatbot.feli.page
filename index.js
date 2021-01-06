@@ -41,6 +41,7 @@ app.use("*", (req, res) => {
 reminderEmitter.on("time", async (reminder) => {
     const user = await UserAPI.getUser(reminder.userId);
     const email = user.email;
+    if (!email || email === "") return;
     await MailerAPI.sendEmail(
         email,
         `Reminder: ${reminder.content}`,
