@@ -16,6 +16,7 @@ function handleSignedIn(signedIn) {
     chatbotSection.style.display = !signedIn ? "none" : "";
     signOutButton.style.display = !signedIn ? "none" : "";
     controlsDiv.style.display = !signedIn ? "none" : "";
+    if (!signedIn) startFirebaseUI();
     if (!signedIn) messagesDiv.innerHTML = "";
 }
 
