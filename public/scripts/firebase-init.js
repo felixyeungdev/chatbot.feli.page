@@ -17,6 +17,7 @@ var firebaseUIConfig = {
     },
     signInFlow: "popup",
     signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
         {
             provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             providerName: "Google",
@@ -26,6 +27,7 @@ var firebaseUIConfig = {
             clientId:
                 "140818689378-mpshne3ukb006rksmal25gam5pro3cin.apps.googleusercontent.com",
         },
+        firebase.auth.GithubAuthProvider.PROVIDER_ID,
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
     ],
     credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
