@@ -27,6 +27,7 @@ var firebaseUIConfig = {
             clientId:
                 "140818689378-mpshne3ukb006rksmal25gam5pro3cin.apps.googleusercontent.com",
         },
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
         firebase.auth.GithubAuthProvider.PROVIDER_ID,
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
     ],
