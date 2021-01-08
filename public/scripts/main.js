@@ -73,4 +73,4 @@ inputField.addEventListener("keyup", function (event) {
     }
 });
 
-handleSignedIn(false);
+// handleSignedIn(false);
