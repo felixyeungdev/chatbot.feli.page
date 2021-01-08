@@ -17,7 +17,11 @@ var firebaseUIConfig = {
     },
     signInFlow: "popup",
     signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        // {
+        //     provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        //     signInMethod:
+        //         firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+        // },
         {
             provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             providerName: "Google",
@@ -29,7 +33,7 @@ var firebaseUIConfig = {
         },
         firebase.auth.TwitterAuthProvider.PROVIDER_ID,
         firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
+        // firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
     ],
     credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
 };
