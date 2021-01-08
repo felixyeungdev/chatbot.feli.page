@@ -1,4 +1,4 @@
-const currentUser;
+var currentUser;
 var userToken;
 const signInButton = document.querySelector("#signInButton");
 const signInAnonymouslyButton = document.querySelector(
