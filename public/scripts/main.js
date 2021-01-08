@@ -1,3 +1,4 @@
+const currentUser;
 var userToken;
 const signInButton = document.querySelector("#signInButton");
 const signInAnonymouslyButton = document.querySelector(
@@ -55,6 +56,7 @@ async function handleSubmit() {
 }
 
 firebase.auth().onAuthStateChanged(async (user) => {
+    currentUser = user;
     userToken = user ? await user.getIdToken() : null;
     user ? handleSignedIn(true) : handleSignedIn(false);
 });
