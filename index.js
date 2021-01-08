@@ -23,8 +23,16 @@ app.post("/api/chatBot", decodeIDToken, async (req, res) => {
         result.auth = req.currentUser ? true : false;
         const message = req.body.message;
         const userId = req.currentUser ? req.currentUser.user_id : null;
+        const emailVerified = req.currentUser
+            ? req.currentUser.email_verified
+            : null;
+        result.emailVerified = emailVerified;
         await UserAPI.registerUser(userId, req.currentUser);
-        result.messages = await ChatBot.handleRequest(message, userId);
+        result.messages = await ChatBot.handleRequest(
+            message,
+            userId,
+            emailVerified
+        );
     } catch (error) {
         console.log(error);
     }
