@@ -36,6 +36,8 @@ var firebaseUIConfig = {
         // firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
     ],
     credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
+    tosUrl: "https://feli.page/terms",
+    privacyPolicyUrl: "https://feli.page/privacy",
 };
 
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
