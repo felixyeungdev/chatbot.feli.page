@@ -12,4 +12,7 @@
     button:focus {
         @include MaterialBoxShadow(2);
     }
+    a {
+        color: #f9a825;
+    }
 }
